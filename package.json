@@ -1,7 +1,10 @@
 {
-  "name": "my-node-app-pso",
+  "name": "pso-b-kelompok8",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": {
+    "url": "https://github.com/AlifDestiano/PSOTSGB"
+  },
   "scripts": {
     "test": "mocha"
   },
