@@ -1,0 +1,44 @@
+name: Node.js CI with docker
+
+on:
+  release:
+    types: [created]
+  push:
+    branches: [main]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - name: buat docker image
+        run: docker build -t farhanrizqi/final_project_pso .
+      - name: Login docker hub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+      - name: publish image to docker hub
+        run: docker push farhanrizqi/final_project_pso:latest
+
+  tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 22.2.0
+      - name: install nodejs dll
+        run: npm install
+      - name: Run tests
+        run:
+          npm test
