@@ -39,6 +39,12 @@ jobs:
           node-version: 22.2.0
       - name: install nodejs dll
         run: npm install
+      - name: install mocha
+        run: npm install --save-dev mocha
+      - name: Verify Mocha installation
+        run: npm mocha --version
+      - name: Change permissions for nyc
+        run: chmod 0777 ./node_modules/.bin/nyc
       - name: Run tests
         run: npm test
   
