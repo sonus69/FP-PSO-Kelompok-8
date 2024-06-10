@@ -40,6 +40,5 @@ jobs:
       - name: install nodejs dll
         run: npm install
       - name: Run tests
-        run:
-          npm test
+        run: npm test
   
