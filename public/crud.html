@@ -35,10 +35,11 @@
 
             itemsTableBody.innerHTML = '';
 
-            items.forEach(item => {
+            items.forEach((item, index) => {
                 const row = document.createElement('tr');
                 row.dataset.id = item._id; // Store the ID in a data attribute
                 row.innerHTML = `
+                    <td>${index + 1}</td>
                     <td>${item.name}</td>
                     <td>${item.description}</td>
                     <td><button class="btn btn-danger btn-sm" onclick="deleteItem('${item._id}')">Delete</button></td>
@@ -95,8 +96,8 @@
                 selected.classList.remove('selected');
             }
             event.currentTarget.classList.add('selected');
-            document.getElementById('update-name').value = event.currentTarget.cells[0].innerText;
-            document.getElementById('update-description').value = event.currentTarget.cells[1].innerText;
+            document.getElementById('update-name').value = event.currentTarget.cells[1].innerText;
+            document.getElementById('update-description').value = event.currentTarget.cells[2].innerText;
         }
 
         window.onload = () => {
@@ -132,6 +133,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>No.</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Action</th>
@@ -155,7 +157,7 @@
         <input type="text" id="update-description" placeholder="Description" class="form-control mb-2">
         <button onclick="updateItem()" class="btn btn-warning">Update</button>
     </div>
-    
+
     <br>
     <div class="container mt-4">
         <button onclick="location.href='/'" class="btn btn-secondary">Back to Home</button>
