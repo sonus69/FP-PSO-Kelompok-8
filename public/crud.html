@@ -22,10 +22,11 @@
 
             if (response.ok) {
                 alert('Item created successfully');
-                getItems();
                 // Clear the input fields
                 document.getElementById('create-name').value = '';
                 document.getElementById('create-description').value = '';
+                // Reload items to include the new item
+                await getItems();
             } else {
                 alert('Error creating item');
             }
@@ -74,7 +75,7 @@
 
             if (response.ok) {
                 alert('Item updated successfully');
-                getItems();
+                await getItems();
             } else {
                 alert('Error updating item');
             }
@@ -87,7 +88,7 @@
 
             if (response.ok) {
                 alert('Item deleted successfully');
-                getItems();
+                await getItems();
             } else {
                 alert('Error deleting item');
             }
