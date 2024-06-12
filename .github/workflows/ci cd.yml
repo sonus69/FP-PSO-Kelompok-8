@@ -54,3 +54,14 @@ jobs:
       - name: Run tests
         run: npm test
   
+  deploy:
+    needs: [build, tests]
+    runs-on: self-hosted
+    steps:
+      - name: Pull image dockerhub
+        run: docker pull farhanrizqi/final_project_pso:latest
+      - name: Delete old container
+        run: docker rm -f final_project_pso-container
+      - name: run docker container
+        run: docker run -d -p 3000:3000 --name final_project_pso-container farhanrizqi/final_project_pso
+  
