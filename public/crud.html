@@ -44,8 +44,8 @@
                 row.dataset.id = item._id; // Store the ID in a data attribute
                 row.innerHTML = `
                     <td style="width: 50px;">${index + 1}</td>
-                    <td class="description-name-column">${item.name}</td>
-                    <td class="description-column">${item.description}</td>
+                    <td class="description-name-column" onclick="editCell(this)" data-original-value="${item.name}">${item.name}</td>
+                    <td class="description-column" onclick="editCell(this)" data-original-value="${item.description}">${item.description}</td>
                     <td style="width: 100px;"><button class="btn btn-danger btn-sm" onclick="deleteItem('${item._id}')">Delete</button></td>
                 `;
                 row.addEventListener('click', selectItem);
@@ -53,19 +53,8 @@
             });
         }
 
-        async function updateItem() {
-            const name = document.getElementById('update-name').value;
-            const description = document.getElementById('update-description').value;
-
-            const items = await fetch('/api/items').then(response => response.json());
-            const item = items.find(item => item.name === name);
-
-            if (!item) {
-                alert('Item not found');
-                return;
-            }
-
-            const response = await fetch(`/api/items/${item._id}`, {
+        async function updateItem(id, name, description) {
+            const response = await fetch(`/api/items/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -101,9 +90,44 @@
                 selected.classList.remove('selected');
             }
             event.currentTarget.classList.add('selected');
-            document.getElementById('update-name').value = event.currentTarget.cells[1].innerText;
-            document.getElementById('update-description').value = event.currentTarget.cells[2].innerText;
         }
+
+        function editCell(cell) {
+            if (!cell.querySelector('input')) {
+                const value = cell.innerText;
+                const originalValue = cell.dataset.originalValue;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = value;
+                input.classList.add('form-control');
+                input.onblur = () => {
+                    const newValue = input.value.trim();
+                    if (newValue === '') {
+                        if (originalValue.trim() === '') {
+                            cell.innerText = '';
+                        } else {
+                            cell.innerText = originalValue;
+                        }
+                    } else {
+                        cell.innerText = newValue;
+                    }
+
+                    // If the new value is different from the original value, update the item
+                    if (newValue !== originalValue) {
+                        const row = cell.parentElement;
+                        const id = row.dataset.id;
+                        const name = row.cells[1].innerText;
+                        const description = row.cells[2].innerText;
+                        updateItem(id, name, description);
+                    }
+                };
+                cell.innerText = '';
+                cell.appendChild(input);
+                input.focus();
+            }
+        }
+
+
 
         window.onload = () => {
             getItems();
@@ -113,20 +137,25 @@
         .gradient-bg {
             background-image: linear-gradient(to right, #21677a, #47508c);
         }
+
         .selected {
             background-color: #f0f0f0;
         }
+
         .input-width {
             max-width: 300px;
         }
+
         .description-column {
-            max-width: 300px;
+            max-width: 100px;
             max-height: 60px;
             overflow-y: auto;
             word-wrap: break-word;
         }
+
         .description-name-column {
-            max-width: 60px;
+            max-width: 5px;
+            /* Ubah lebar maksimum kolom Nama sesuai kebutuhan */
             max-height: 60px;
             overflow-y: auto;
             word-wrap: break-word;
@@ -165,20 +194,10 @@
     </div>
 
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Create Item</h2>
-                <input type="text" id="create-name" placeholder="Nama" class="form-control mb-2 input-width">
-                <input type="text" id="create-description" placeholder="Deskripsi" class="form-control mb-2 input-width">
-                <button onclick="createItem()" class="btn btn-primary">Create</button>
-            </div>
-            <div class="col-md-6">
-                <h2>Update Item</h2>
-                <input type="text" id="update-name" placeholder="Name" class="form-control mb-2 input-width">
-                <input type="text" id="update-description" placeholder="Description" class="form-control mb-2 input-width">
-                <button onclick="updateItem()" class="btn btn-warning">Update</button>
-            </div>
-        </div>
+        <h2>Create Item</h2>
+        <input type="text" id="create-name" placeholder="Nama" class="form-control mb-2 input-width">
+        <input type="text" id="create-description" placeholder="Deskripsi" class="form-control mb-2 input-width">
+        <button onclick="createItem()" class="btn btn-primary">Create</button>
     </div>
 
     <br>
