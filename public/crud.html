@@ -93,39 +93,49 @@
         }
 
         function editCell(cell) {
-            if (!cell.querySelector('input')) {
-                const value = cell.innerText;
-                const originalValue = cell.dataset.originalValue;
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.value = value;
-                input.classList.add('form-control');
-                input.onblur = () => {
-                    const newValue = input.value.trim();
-                    if (newValue === '') {
-                        if (originalValue.trim() === '') {
-                            cell.innerText = '';
-                        } else {
-                            cell.innerText = originalValue;
-                        }
-                    } else {
-                        cell.innerText = newValue;
-                    }
+    if (!cell.querySelector('input')) {
+        const value = cell.innerText;
+        const originalValue = cell.dataset.originalValue;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = value;
+        input.classList.add('form-control');
 
-                    // If the new value is different from the original value, update the item
-                    if (newValue !== originalValue) {
-                        const row = cell.parentElement;
-                        const id = row.dataset.id;
-                        const name = row.cells[1].innerText;
-                        const description = row.cells[2].innerText;
-                        updateItem(id, name, description);
-                    }
-                };
-                cell.innerText = '';
-                cell.appendChild(input);
-                input.focus();
+        // Event listener untuk memproses Enter key press
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                input.blur(); // Pemicu blur event
             }
-        }
+        });
+
+        input.onblur = () => {
+            const newValue = input.value.trim();
+            if (newValue === '') {
+                if (originalValue.trim() === '') {
+                    cell.innerText = '';
+                } else {
+                    cell.innerText = originalValue;
+                }
+            } else {
+                cell.innerText = newValue;
+            }
+
+            // Jika nilai baru berbeda dari nilai asli, perbarui item
+            if (newValue !== originalValue) {
+                const row = cell.parentElement;
+                const id = row.dataset.id;
+                const name = row.cells[1].innerText;
+                const description = row.cells[2].innerText;
+                updateItem(id, name, description);
+            }
+        };
+
+        cell.innerText = '';
+        cell.appendChild(input);
+        input.focus();
+    }
+}
+
 
 
 
