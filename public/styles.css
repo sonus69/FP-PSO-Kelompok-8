@@ -1,0 +1,33 @@
+.full-height {
+    height: 100vh;
+}
+.gradient-bg {
+    background-image: linear-gradient(to right, #21677a, #47508c);
+}
+
+.gradient-bg {
+    background-image: linear-gradient(to right, #21677a, #47508c);
+}
+
+.selected {
+    background-color: #f0f0f0;
+}
+
+.input-width {
+    max-width: 300px;
+}
+
+.description-column {
+    max-width: 100px;
+    max-height: 60px;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+
+.description-name-column {
+    max-width: 5px;
+    /* Ubah lebar maksimum kolom Nama sesuai kebutuhan */
+    max-height: 60px;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
