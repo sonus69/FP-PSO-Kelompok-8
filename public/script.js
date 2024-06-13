@@ -36,7 +36,7 @@ async function getItems() {
                     <td style="width: 50px;">${index + 1}</td>
                     <td class="description-name-column" onclick="editCell(this)" data-original-value="${item.name}">${item.name}</td>
                     <td class="description-column" onclick="editCell(this)" data-original-value="${item.description}">${item.description}</td>
-                    <td style="width: 100px;"><button class="btn btn-danger btn-sm" onclick="deleteItem('${item._id}')">Delete</button></td>
+                    <td style="width: 100px;"><button class="btn btn-success btn-sm" onclick="deleteItem('${item._id}')">Selesai</button></td>
                 `;
         row.addEventListener('click', selectItem);
         itemsTableBody.appendChild(row);
