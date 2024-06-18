@@ -9,8 +9,8 @@ terraform {
 
 provider "aws" {
   region = "ap-southeast-2"
-  access_key = "AKIAVHGDT5CM6HNN74XY"
-  secret_key = "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"
+  access_key = "AKIAVHGDT5CMQKQJ4H4R"
+  secret_key = "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"
 }
 
 resource "tls_private_key" "rsa_4096" {
@@ -64,7 +64,7 @@ resource "aws_instance" "public_instance" {
   vpc_security_group_ids = [aws_security_group.allow_http_ssh.id]
 
   tags = {
-    Name = "pso-bismillah"
+    Name = "pso-terraform"
   }
 }
 
