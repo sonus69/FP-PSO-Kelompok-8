@@ -115,7 +115,7 @@ jobs:
       - name: Push Docker Image to EC2 Instance
         shell: /usr/bin/bash -e {0}
         env:
-          AWS_REGION: ap-southeast-2
+          AWS_REGION: us-east-2
           TF_VAR_access_key: ${{ secrets.TF_USER_AWS_KEY }}
           TF_VAR_secret_key: ${{ secrets.TF_USER_AWS_SECRET }}
           INSTANCE_IP: ${{ env.INSTANCE_IP }}
