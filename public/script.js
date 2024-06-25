@@ -33,11 +33,11 @@ async function getItems() {
         const row = document.createElement('tr');
         row.dataset.id = item._id; // Store the ID in a data attribute
         row.innerHTML = `
-                    <td style="width: 50px;">${index + 1}</td>
-                    <td class="description-name-column" onclick="editCell(this)" data-original-value="${item.name}">${item.name}</td>
-                    <td class="description-column" onclick="editCell(this)" data-original-value="${item.description}">${item.description}</td>
-                    <td style="width: 100px;"><button class="btn btn-success btn-sm" onclick="deleteItem('${item._id}')">Selesai</button></td>
-                `;
+            <td style="width: 50px;">${index + 1}</td>
+            <td class="description-name-column" onclick="editCell(this)" data-original-value="${item.name}">${item.name}</td>
+            <td class="description-column" onclick="editCell(this)" data-original-value="${item.description}">${item.description}</td>
+            <td style="width: 100px;"><button class="crud-button" onclick="deleteItem('${item._id}')">Selesai</button></td>
+        `;
         row.addEventListener('click', selectItem);
         itemsTableBody.appendChild(row);
     });
@@ -125,6 +125,7 @@ function editCell(cell) {
         input.focus();
     }
 }
+
 window.onload = () => {
     getItems();
 };
