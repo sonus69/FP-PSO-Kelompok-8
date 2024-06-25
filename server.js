@@ -35,8 +35,17 @@ app.get('/crud', (req, res) => {
   res.sendFile(__dirname + '/public/crud.html');
 });
 
+app.get('/about', (req, res) => {
+  res.sendFile(__dirname + '/public/about.html');
+});
+
+app.get('/contact', (req, res) => {
+  res.sendFile(__dirname + '/public/contact.html');
+});
+
 // Start Server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
 

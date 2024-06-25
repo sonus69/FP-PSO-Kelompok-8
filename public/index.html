@@ -11,20 +11,49 @@
 </head>
 
 <body>
-
-    <div class="container-fluid full-height">
-        <div class="row full-height">
-            <div class="col-md-9 d-flex flex-column justify-content-center align-items-center gradient-bg" style="border-right: 1px solid #ccc;">
-                <p style="padding: 10px; font-size: 70px; color: rgb(255, 248, 239);">Manajemen Tugas</p>
+    <header>
+        <nav>
+            <div class="logo">TugasKu</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="crud.html">Tugas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Remember and Manage Your Works</h1>
+                <p>Cara mudah, cerdas dan aman untuk daftar dan kelola tugas kuliah kamu dengan TugasKu.</p>
+                <button><a href="crud.html">Get Started</a></button>
             </div>
-            <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
-                <p style="font-size: 20px; padding: 2px; text-align:center;">Mulai Rencanakan Tugas</h3>
-                <div style="padding: 10px; border: none; cursor: default;">
-                    <button onclick="location.href='/crud'" style="padding: 10px 20px; background-color: #333; color: white; border: none; cursor: pointer;">Masuk</button>
-                </div>
+        </section>
+        <section class="about">
+            <div class="about-content">
+                <h2>About</h2>
+                <p>Hello, kami adalah developer dari TugasKu, Yuk cari tau tentang kami.</p>
+                <button onclick="location.href='about.html'">More About Us</button>
             </div>
-        </div>
-    </div>
+            <div class="about-image">
+                <a href="https://ibb.co.com/gFBTKhh"><img src="https://i.ibb.co.com/cX7FnVV/Green-minimalist-professional-Business-Proposal-Presentation.png" alt="About us" border="0"></a>
+            </div>
+        </section>
+        <section class="stats">
+            <div class="stat">
+                <h3>+17</h3>
+                <p>Universitas</p>
+            </div>
+            <div class="stat">
+                <h3>+3176</h3>
+                <p>Mahasiswa</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; Kelompok 8 - PSO B - Sistem Informasi ITS</p>
+    </footer>
 </body>
 
 </html>
