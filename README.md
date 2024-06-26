@@ -10,3 +10,6 @@ FP ini adalah aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibang
 
 ### Alat Pengujian
 - **Mocha**: Testing JavaScript untuk program Node.js.
+
+### File Dokumentasi Final Project
+- Berikut file dokumentasi kami dalam pembuatan project tersebut https://docs.google.com/document/d/1d3LCI84Qzu9nF25DUr4n5HLtOgOi0FnEpbNlgFK0QvE/edit?usp=sharing
